@@ -17,12 +17,10 @@
     "url": "https://github.com/AhmadAbdelaziz8/odin-battleship/issues"
   },
   "homepage": "https://github.com/AhmadAbdelaziz8/odin-battleship#readme",
-  "dependencies": {
-    "jest": "^29.7.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
-    "babel-jest": "^29.7.0"
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
   }
 }
