@@ -1,4 +1,3 @@
-'''
 // Factory function to create Ship objects
 const Ship = (length) => {
   if (length <= 0) {
@@ -26,4 +25,3 @@ const Ship = (length) => {
 };
 
 export default Ship;
-'''

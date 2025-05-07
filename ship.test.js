@@ -1,4 +1,3 @@
-'''
 import Ship from './ship';
 
 describe('Ship', () => {
@@ -46,4 +45,3 @@ describe('Ship', () => {
     expect(testShip.getHits()).toBe(4); // Hits can exceed length
   });
 });
-'''
