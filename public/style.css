@@ -1,0 +1,338 @@
+:root {
+    /* Main color palette */
+    --primary-color: #1a237e; /* Dark blue */
+    --secondary-color: #0d47a1; /* Medium blue */
+    --accent-color: #0097a7; /* Teal */
+    --light-color: #e3f2fd; /* Light blue */
+    --dark-color: #002171; /* Deep navy */
+    
+    /* Game element colors */
+    --empty-color: #ffffff; /* White */
+    --ship-color: #455a64; /* Blue-grey */
+    --hit-color: #d32f2f; /* Red */
+    --miss-color: #78909c; /* Grey */
+    --sunk-color: #7f0000; /* Dark red */
+    --hover-color: rgba(13, 71, 161, 0.3); /* Semi-transparent blue */
+    --active-color: rgba(0, 151, 167, 0.2); /* Semi-transparent teal */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+#game-status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--light-color);
+}
+
+.game-boards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.board-container {
+    margin: 15px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Highlight active board */
+.board-container.active {
+    background-color: var(--active-color);
+    box-shadow: 0 0 15px rgba(0, 151, 167, 0.3);
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 2px;
+    background-color: var(--light-color);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    background-color: var(--empty-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Cell hover state - only apply to enemy board cells that aren't already attacked */
+.board-container.enemy .cell:not(.hit):not(.miss):hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+}
+
+/* Cell with a ship */
+.cell.ship {
+    background-color: var(--ship-color);
+}
+
+/* Cell that was a hit */
+.cell.hit {
+    background-color: var(--hit-color);
+    position: relative;
+}
+
+/* X mark for hit */
+.cell.hit::before, .cell.hit::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 4px;
+    background-color: white;
+}
+
+.cell.hit::before {
+    transform: rotate(45deg);
+}
+
+.cell.hit::after {
+    transform: rotate(-45deg);
+}
+
+/* Cell that was a miss */
+.cell.miss {
+    background-color: var(--miss-color);
+    position: relative;
+}
+
+/* Dot for miss */
+.cell.miss::before {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* Cell that is part of a sunk ship */
+.cell.sunk {
+    background-color: var(--sunk-color);
+}
+
+/* Sunken ship styling */
+.cell.sunk::before, .cell.sunk::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+}
+
+.cell.sunk::before {
+    width: 70%;
+    height: 4px;
+    transform: rotate(45deg);
+}
+
+.cell.sunk::after {
+    width: 70%;
+    height: 4px;
+    transform: rotate(-45deg);
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    background-color: var(--light-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.actions, .info {
+    flex: 1;
+    min-width: 300px;
+    padding: 15px;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+/* Game info styles */
+.info p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cell-example {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.cell-example.ship {
+    background-color: var(--ship-color);
+}
+
+.cell-example.hit {
+    background-color: var(--hit-color);
+    position: relative;
+}
+
+.cell-example.hit::before, .cell-example.hit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 2px;
+    background-color: white;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cell-example.hit::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cell-example.miss {
+    background-color: var(--miss-color);
+    position: relative;
+}
+
+.cell-example.miss::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+}
+
+.cell-example.sunk {
+    background-color: var(--sunk-color);
+    position: relative;
+}
+
+.cell-example.sunk::before, .cell-example.sunk::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 2px;
+    background-color: white;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cell-example.sunk::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+}
+
+button:disabled {
+    background-color: var(--miss-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .game-boards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .board {
+        grid-template-columns: repeat(10, 30px);
+        grid-template-rows: repeat(10, 30px);
+    }
+    
+    .cell {
+        width: 30px;
+        height: 30px;
+    }
+}

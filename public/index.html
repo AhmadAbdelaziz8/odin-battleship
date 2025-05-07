@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Battleship</h1>
+            <div id="game-status">Loading game...</div>
+        </header>
+        
+        <div class="game-boards">
+            <div class="board-container player">
+                <h2>Your Fleet</h2>
+                <div id="player-board-grid" class="board"></div>
+            </div>
+            <div class="board-container enemy">
+                <h2>Enemy Waters</h2>
+                <div id="computer-board-grid" class="board"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="actions">
+                <button id="new-game">New Game</button>
+                <button id="reset-game">Reset</button>
+            </div>
+            <div class="info">
+                <h3>Game Info</h3>
+                <p>Click on the enemy board to attack. Sink all enemy ships to win!</p>
+                <div class="legend">
+                    <div><span class="cell-example ship"></span> Your Ship</div>
+                    <div><span class="cell-example hit"></span> Hit</div>
+                    <div><span class="cell-example miss"></span> Miss</div>
+                    <div><span class="cell-example sunk"></span> Sunk</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="main.js"></script>
+</body>
+</html>

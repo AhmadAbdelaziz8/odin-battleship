@@ -1,4 +1,4 @@
-import Ship from './ship';
+import Ship from '../src/components/Ship.js';
 
 describe('Ship', () => {
   let testShip;
@@ -43,5 +43,10 @@ describe('Ship', () => {
     testShip.hit(); // Extra hit
     expect(testShip.isSunk()).toBe(true);
     expect(testShip.getHits()).toBe(4); // Hits can exceed length
+  });
+  
+  test('should throw error if length is not positive', () => {
+    expect(() => Ship(0)).toThrow('Ship length must be positive');
+    expect(() => Ship(-1)).toThrow('Ship length must be positive');
   });
 });

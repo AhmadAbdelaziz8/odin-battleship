@@ -1,4 +1,4 @@
-import Gameboard from './gameboard';
+import Gameboard from './gameboard.js';
 
 const Player = (type) => {
   // Basic properties
@@ -43,4 +43,4 @@ const Player = (type) => {
   };
 };
 
-export default Player;
+export { Player as default };
