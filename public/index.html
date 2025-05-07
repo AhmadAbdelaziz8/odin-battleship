@@ -13,6 +13,12 @@
             <div id="game-status">Loading game...</div>
         </header>
         
+        <div class="scoreboard" id="scoreboard">
+            <div class="score-item">Wins: <span class="win-count">0</span></div>
+            <div class="score-item">Losses: <span class="loss-count">0</span></div>
+            <div class="score-item">Win Rate: <span class="win-rate">0%</span></div>
+        </div>
+        
         <div class="game-boards">
             <div class="board-container player">
                 <h2>Your Fleet</h2>
@@ -24,11 +30,46 @@
             </div>
         </div>
         
+        <div class="ship-placement" id="ship-placement">
+            <h3>Place Your Ships</h3>
+            <div class="orientation-control">
+                <button id="rotate-ship">Rotate Ship</button>
+                <span id="orientation-display">Horizontal</span>
+            </div>
+            <div class="ships-container" id="ship-selection-area">
+                <!-- Ship options will be added here dynamically -->
+            </div>
+            <button id="random-placement">Random Placement</button>
+            <button id="start-game" disabled>Start Game</button>
+        </div>
+        
         <div class="controls">
             <div class="actions">
                 <button id="new-game">New Game</button>
                 <button id="reset-game">Reset</button>
             </div>
+            
+            <div class="game-options">
+                <h3>Game Options</h3>
+                <div class="option-group">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="board-size">Board Size:</label>
+                    <select id="board-size">
+                        <option value="8">8×8</option>
+                        <option value="10" selected>10×10</option>
+                        <option value="12">12×12</option>
+                    </select>
+                </div>
+                <button id="apply-options">Apply Options</button>
+            </div>
+            
             <div class="info">
                 <h3>Game Info</h3>
                 <p>Click on the enemy board to attack. Sink all enemy ships to win!</p>
@@ -38,6 +79,14 @@
                     <div><span class="cell-example miss"></span> Miss</div>
                     <div><span class="cell-example sunk"></span> Sunk</div>
                 </div>
+            </div>
+            
+            <div class="game-stats" id="game-stats">
+                <h3>Game Statistics</h3>
+                <div class="stat-item">Turns: <span id="turn-count">0</span></div>
+                <div class="stat-item">Hits: <span id="hit-count">0</span></div>
+                <div class="stat-item">Misses: <span id="miss-count">0</span></div>
+                <div class="stat-item">Accuracy: <span id="accuracy">0%</span></div>
             </div>
         </div>
     </div>
